@@ -1,19 +1,44 @@
 const express = require("express")
+const BookModel = require("../model/book")
 
 const routes = express.Router()
 
 //Get All Books
 routes.get("/books", (req, res) => {
-    res.send({message: "Get All Books"})
-})
+    BookModel.find({})
+        .then((books)=>{
+            res.status(200).json({
+                satus: true,
+                message: "Books fetched successfully",
+                count: books.length,
+                data: books
+            })
+        })
+        .catch((err)=>{
+            res.status(500).json({
+                status: false,
+                message: err.message
+            })
+        })
+    })
+
 
 //Add NEW Book
-routes.post("/books", (req, res) => {
-    res.send({message: "Add NEW Book"})
+routes.post("/books", async (req, res) => {
+    const newBookData = req.body
+    try{
+        const newBookModel = new BookModel(newBookData)
+        const newBook = await newBookModel.save()
+    }catch(error){
+        res.status(600).json({
+            status:false,
+            message: err.message
+        })
+    }
 })
 
 //Update existing Book By Id
-routes.post("/book/:bookid", (req, res) => {
+routes.put("/book/:bookid", (req, res) => {
     res.send({message: "Update existing Book By Id"})
 })
 
