@@ -28,10 +28,10 @@ router.post('/employees', [
 ], createEmployee);
 
 // Find employee by ID
-router.get('/employees/:eid', getEmployeeById);
+router.get('/employees/:employee_id', getEmployeeById);
 
 // Update employee records by employee ID
-router.put('/employees/:eid', [
+router.put('/employees/:employee_id', [
   body().custom(b => {
     const allowed = ['first_name','last_name','email','position','salary','hired','department'];
     const keys = Object.keys(b || {});
@@ -48,7 +48,7 @@ router.put('/employees/:eid', [
 
 
 // Delete an employee record
-router.delete('/employees', deleteEmployee);
+router.delete('/employees/:employee_id', deleteEmployee);
 
 // Export router
 module.exports = router;

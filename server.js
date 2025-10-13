@@ -1,34 +1,25 @@
-const express = require("express")
-const booksRoutes = require("./routes/books")
-const mongoose = require('mongoose')
+require('dotenv').config();
+const express = require('express');
+const cors = require('cors');
+const morgan = require('morgan');
 
+const { connectDB } = require('./mongo-db');
+const employeeRoutes = require('./employee-routes');
 
-const app = express()
+// Create instance of express app
+const app = express();
 
-const DB_CONNECTION_STRING = "mongodb+srv://ericlaudrum:HARPOGROUCH0mdb@cluster0.9b1t7zk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-const SERVER_PORT = process.env.SERVER_PORT || 3001
+app.use(cors());
+app.use(express.json());
+app.use(morgan('dev'));
 
-app.use(express.json())
-app.use(express.urlencoded())
+app.use('/emp', employeeRoutes);
 
+// Port for MongoDB 
+const PORT = process.env.PORT || 3000;
+const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/comp3123_assignment1';
 
-app.use("/api/v1", booksRoutes)
-
-app.route("/")
-    .get((req, res) => {
-        res.send("<h1>MogoDB + Mongoose Example</h1>")
-    })
-
-    
-mongoose.connect(DB_CONNECTION_STRING)
-    .then(()=>{
-        console.log("Connected to MongoDB: ")
-        app.listen(SERVER_PORT, () =>{
-            console.log(`Server running at http://localhost:${SERVER_PORT}/`)
-        })
-    })
-    .catch((error)=>{
-        console.log("Error connecting to MongoDB: ", error.message)
-    })
-
-
+// Connect to MongoDB and start server
+connectDB(uri).then(() => {
+  app.listen(PORT, () => console.log(`🚀 Server listening on ${PORT}`));
+});

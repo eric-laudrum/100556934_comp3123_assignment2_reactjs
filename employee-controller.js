@@ -34,8 +34,8 @@ exports.createEmployee = async (req, res, next) => {
 // --------------------------   Get employee record by ID ------------------------
 exports.getEmployeeById = async (req, res, next) => {
   try {
-    const employee = await Employee.findById(req.params.eid).lean();
-    if (!emp) return res.status(404).json({ status: false, message: 'Employee not found' });
+    const employee = await Employee.findById(req.params.employee_id).lean();
+    if (!employee) return res.status(404).json({ status: false, message: 'Employee not found' });
     res.status(200).json({
       employee_id: employee._id.toString(),
       first_name: employee.first_name,
@@ -56,7 +56,7 @@ exports.updateEmployee = async (req, res, next) => {
     if (!errors.isEmpty()) return res.status(400).json({ status: false, errors: errors.array() });
 
     const updated = await Employee.findByIdAndUpdate(
-      req.params.eid,
+      req.params.employee_id,
       { $set: { ...req.body, updated_at: new Date() } },
       { new: true }
     );
@@ -69,9 +69,9 @@ exports.updateEmployee = async (req, res, next) => {
 
 exports.deleteEmployee = async (req, res, next) => {
   try {
-    const { eid } = req.query;
-    if (!eid) return res.status(400).json({ status: false, message: 'eid query parameter is required' });
-    const deleted = await Employee.findByIdAndDelete(eid);
+    const { employee_id } = req.query;
+    if (!employee_id) return res.status(400).json({ status: false, message: 'employee_id query parameter is required' });
+    const deleted = await Employee.findByIdAndDelete(employee_id);
     if (!deleted) return res.status(404).json({ status: false, message: 'Employee not found' });
     res.status(200).json({ message: 'Employee deleted successfully.' });
   } catch (e) { next(e); }
