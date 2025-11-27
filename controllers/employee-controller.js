@@ -1,5 +1,5 @@
 const { validationResult } = require('express-validator');
-const Employee = require('./employee');
+const Employee = require('../models/employee');
 
 // --------------------------   List all employees on file ------------------------
 exports.listEmployees = async (req, res, next) => {

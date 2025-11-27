@@ -8,7 +8,7 @@ const {
   getEmployeeById, 
   updateEmployee, 
   deleteEmployee
-} = require('./employee-controller');
+} = require('../controllers/employee-controller');
 
 // Create router
 const router = express.Router();

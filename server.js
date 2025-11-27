@@ -3,8 +3,8 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 
-const { connectDB } = require('./mongo-db');
-const employeeRoutes = require('./employee-routes');
+const { connectDB } = require('./config/mongo-db');
+const employeeRoutes = require('./routes/employee-routes');
 
 // Create instance of express app
 const app = express();
