@@ -1,24 +1,32 @@
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
+import Login from './pages/Login';
+import SignUp from './pages/SignUp';
+import EmployeeList from './pages/EmployeeList';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    
+    <Router>
+      <div className="App">
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          COMP3123 Assignment 2
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+        <div>
+          <div>Eric Laudrum</div>
+          <div>100556934</div>
+        </div>
+
+      
+
+        <Routes>
+          <Route path='/' element={<Navigate to='/login' />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<SignUp />} />
+          <Route path='/employees' element={<EmployeeList />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
