@@ -16,7 +16,7 @@ const employeeSchema = new mongoose.Schema({
   updated: { type: Date, default: Date.now }
 }, { collection: 'employees' });
 
-// Save Employee Info
+// Save Employee
 employeeSchema.pre('save', function(next) {
   this.updated = new Date();
   next();

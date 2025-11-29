@@ -57,7 +57,7 @@ exports.updateEmployee = async (req, res, next) => {
 
     const updated = await Employee.findByIdAndUpdate(
       req.params.employee_id,
-      { $set: { ...req.body, updated_at: new Date() } },
+      { $set: { ...req.body, updated: new Date() } },
       { new: true }
     );
     if (!updated) return res.status(404).json({ status: false, message: 'Employee not found' });
@@ -69,7 +69,7 @@ exports.updateEmployee = async (req, res, next) => {
 
 exports.deleteEmployee = async (req, res, next) => {
   try {
-    const { employee_id } = req.query;
+    const employee_id = req.params.employee_id;
     if (!employee_id) return res.status(400).json({ status: false, message: 'employee_id query parameter is required' });
     const deleted = await Employee.findByIdAndDelete(employee_id);
     if (!deleted) return res.status(404).json({ status: false, message: 'Employee not found' });
