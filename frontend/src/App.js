@@ -12,10 +12,7 @@ function App() {
         <p>
           COMP3123 Assignment 2
         </p>
-        <div>
-          <div>Eric Laudrum</div>
-          <div>100556934</div>
-        </div>
+
 
       
 

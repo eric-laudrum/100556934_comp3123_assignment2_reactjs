@@ -6,7 +6,7 @@ const api = axios.create({
 
 
 // intercept response
-agi.interceptors.request.use(
+api.interceptors.request.use(
     (config) =>{
         // Get saved token and reformat
         const token = localStorage.getItem('token');
