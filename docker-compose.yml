@@ -11,7 +11,7 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: eric123
-      MONGO_INITDB_DATABASE: comp3123_assignment1
+      MONGO_INITDB_DATABASE: comp3123_assignment2
     volumes:
       - mongo_data:/data/db
   mongo-express:

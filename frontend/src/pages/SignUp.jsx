@@ -24,8 +24,22 @@ function SignUp(){
             alert(res.data.message);
             navigate('/login');
         } catch(e){
-            console.error(e.response?.data || e);
-            alert("Error: Sign up failed - " + e)
+
+            // Add additonal checks for debugging
+            if(e.response){
+                console.error('Error response: ' , e.response?.data || e);
+                alert("Error: Sign up failed - " + e)
+
+            }
+            else if(e.request){
+                console.error('Error request: ', e.response?.data || e);
+                alert("Error: Failed to connect to server - " + e)
+            }
+            else{
+                console.error('Error: ', e.response?.data || e);
+                alert("Error: " + e)
+            }
+            
         }
     };
 

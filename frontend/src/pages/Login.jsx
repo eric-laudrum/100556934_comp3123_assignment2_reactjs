@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import api from '../api/axios';
 
 function Login() {
@@ -55,6 +55,11 @@ function Login() {
 
                 <button type="submit">Login</button>
             </form>
+
+            <p>Don't have an account? Create one  
+                 <Link to="/signup">here</Link>
+            </p>
+
         </div>
     );
 }
